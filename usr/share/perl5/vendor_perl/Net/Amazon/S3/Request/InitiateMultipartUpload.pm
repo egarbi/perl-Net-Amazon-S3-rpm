@@ -1,10 +1,11 @@
 package Net::Amazon::S3::Request::InitiateMultipartUpload;
-$Net::Amazon::S3::Request::InitiateMultipartUpload::VERSION = '0.80';
+
 use Moose 0.85;
 use MooseX::StrictConstructor 0.16;
 extends 'Net::Amazon::S3::Request';
 
-has 'bucket'     => ( is => 'ro', isa => 'BucketName',      required => 1 );
+with 'Net::Amazon::S3::Role::Bucket';
+
 has 'key'        => ( is => 'ro', isa => 'Str',             required => 1 );
 has 'acl_short'  => ( is => 'ro', isa => 'Maybe[AclShort]', required => 0 );
 has 'headers' =>
@@ -24,27 +25,21 @@ sub http_request {
         $headers->{'x-amz-server-side-encryption'} = $self->encryption;
     }
 
-    return Net::Amazon::S3::HTTPRequest->new(
-        s3      => $self->s3,
+    return $self->_build_http_request(
         method  => 'POST',
         path    => $self->_uri( $self->key ).'?uploads',
         headers => $self->headers,
-    )->http_request;
+    );
 }
 
 1;
 
-=pod
+__END__
 
-=encoding UTF-8
+#ABSTRACT: An internal class to begin a multipart upload
 
-=head1 NAME
-
-Net::Amazon::S3::Request::InitiateMultipartUpload - An internal class to begin a multipart upload
-
-=head1 VERSION
-
-version 0.80
+=for test_synopsis
+no strict 'vars'
 
 =head1 SYNOPSIS
 
@@ -58,28 +53,8 @@ version 0.80
 
 This module begins a multipart upload
 
-=for test_synopsis no strict 'vars'
-
 =head1 METHODS
 
 =head2 http_request
 
 This method returns a HTTP::Request object.
-
-=head1 AUTHOR
-
-Rusty Conover <rusty@luckydinosaur.com>
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2015 by Amazon Digital Services, Leon Brocard, Brad Fitzpatrick, Pedro Figueiredo, Rusty Conover.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
-=cut
-
-__END__
-
-#ABSTRACT: An internal class to begin a multipart upload
-

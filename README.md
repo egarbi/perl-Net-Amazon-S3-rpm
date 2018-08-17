@@ -31,7 +31,7 @@ fpm --verbose \
   -n perl-Net-Amazon-S3 -v 0.84 \
   -m quique@enriquegarbi.com.ar \
   --url 'https://github.com/egarbi/perl-Net-Amazon-S3-rpm' \
-  -a=noarch \
+  -a noarch \
   --description 'Simple Storage Service from Perl' \
   usr/=/usr/
 ```

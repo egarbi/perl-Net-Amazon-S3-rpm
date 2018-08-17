@@ -9,7 +9,7 @@ cd perl-Net-Amazon-S3-rpm
 rpm2cpio.pl /some/path/perl-Net-Amazon-S3-0.80-1.of.el7.noarch.rpm | cpio -idmv
 ```
 3. Check for pre/post building scripts
-```
+```bash
 rpm -qp --scripts perl-Net-Amazon-S3-0.80-1.of.el7.noarch.rpm
 ```
 4. Clone (or fetch) the latest version from mantainer
@@ -20,8 +20,10 @@ git clone https://github.com/rustyconover/net-amazon-s3.git
 ```
 rsync -az net-amazon-s3/lib/Net/Amazon/* usr/share/perl5/vendor_perl/Net/Amazon/
 rsync -az ~/net-amazon-s3/bin/s3cl usr/bin/s3cl
+cp ~/net-amazon-s3/CHANGES README.md usr/share/doc/perl-Net-Amazon-S3-0.81/
 ```
 6. Build the new rpm, the file can be find on builds/ dir
+```
 fpm --verbose \
   -s dir \
   -t rpm \
@@ -32,3 +34,4 @@ fpm --verbose \
   -a=noarch \
   --description 'Simple Storage Service from Perl' \
   usr/=/usr/
+```

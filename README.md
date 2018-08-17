@@ -22,4 +22,13 @@ rsync -az net-amazon-s3/lib/Net/Amazon/* usr/share/perl5/vendor_perl/Net/Amazon/
 rsync -az ~/net-amazon-s3/bin/s3cl usr/bin/s3cl
 ```
 6. Build the new rpm, the file can be find on builds/ dir
-fpm -s dir --verbose -t rpm -p builds/ -n perl-Net-Amazon-S3 -v 0.84 -m quique@enriquegarbi.com.ar --description 'Simple Storage Service from Perl' usr/=/usr/
+fpm --verbose \
+  -s dir \
+  -t rpm \
+  -p builds/ \
+  -n perl-Net-Amazon-S3 -v 0.84 \
+  -m quique@enriquegarbi.com.ar \
+  --url 'https://github.com/egarbi/perl-Net-Amazon-S3-rpm' \
+  -a=noarch \
+  --description 'Simple Storage Service from Perl' \
+  usr/=/usr/

@@ -29,7 +29,7 @@ fpm --verbose \
   -t rpm \
   -p builds/ \
   -n perl-Net-Amazon-S3 -v 0.84 \
-  -m quique@enriquegarbi.com.ar \
+  -m myemailhere \
   --url 'https://github.com/egarbi/perl-Net-Amazon-S3-rpm' \
   -a "el7.noarch" \
   --description 'Simple Storage Service from Perl' \

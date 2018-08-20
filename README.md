@@ -31,7 +31,8 @@ fpm --verbose \
   -n perl-Net-Amazon-S3 -v 0.84 \
   -m myemailhere \
   --url 'https://github.com/egarbi/perl-Net-Amazon-S3-rpm' \
-  -a "el7.noarch" \
+  -a 'noarch' \
+  --rpm-os linux \
   --description 'Simple Storage Service from Perl' \
   usr/=/usr/
 ```
